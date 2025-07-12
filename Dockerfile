@@ -1,5 +1,5 @@
 
-~FROM redhat/ubi8
+FROM redhat/ubi8
 
 COPY app.py  .
 
