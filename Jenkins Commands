@@ -1,0 +1,16 @@
+To allow Jenkins to execute Docker commands and scripts without manual password prompts, proper permission setup is essential. This includes granting the Jenkins user necessary privileges via the sudoers file.
+
+Why this is needed:
+By default, Jenkins runs as a limited user and cannot execute privileged commands like docker, systemctl, or shell scripts that require sudo. Without permissions, your pipeline jobs will fail or hang.
+
+👉 Below are the commands and steps to configure permissions safely:
+# Add Jenkins user to the docker group
+sudo usermod -aG docker jenkins
+
+# Allow Jenkins to run necessary commands without password
+sudo visudo
+jenkins ALL=(ALL) NOPASSWD: /usr/bin/docker, /usr/bin/systemctl, /bin/bash
+
+Now These Are The Shell Script Commands:-
+sudo docker build -t jenkins:v1 .
+sudo docker run -itd jenkins:v1
